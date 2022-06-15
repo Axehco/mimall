@@ -1,12 +1,10 @@
 <template>
-  <div>
-    orderlist内容
-  </div>
+  <div>OrderHeader内容</div>
 </template>
 
 <script>
 export default {
-  name: 'order-list'
+  name: 'order-header'
 }
 </script>
 
