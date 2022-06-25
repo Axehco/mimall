@@ -35,64 +35,17 @@
                 >
                   <a v-bind:href="'/#/product/' + item.id" target="_blank">
                     <div class="pro-img">
-                      <!-- <img src="/imgs/nav-img/nav-1.png" alt="" /> -->
                       <img :src="item.mainImage" :alt="item.subtitle" />
                     </div>
                     <div class="pro-name">{{ item.name }}</div>
                     <div class="pro-price">{{ item.price | currency }}</div>
                   </a>
                 </li>
-                <!-- <li class="product">
-                  <a href="" target="_blank">
-                    <div class="pro-img">
-                      <img src="/imgs/nav-img/nav-1.png" alt="" />
-                    </div>
-                    <div class="pro-name">小米CC9</div>
-                    <div class="pro-price">1799￥</div>
-                  </a>
-                </li>
-                <li class="product">
-                  <a href="" target="_blank">
-                    <div class="pro-img">
-                      <img src="/imgs/nav-img/nav-1.png" alt="" />
-                    </div>
-                    <div class="pro-name">小米CC9</div>
-                    <div class="pro-price">1799￥</div>
-                  </a>
-                </li>
-                <li class="product">
-                  <a href="" target="_blank">
-                    <div class="pro-img">
-                      <img src="/imgs/nav-img/nav-1.png" alt="" />
-                    </div>
-                    <div class="pro-name">小米CC9</div>
-                    <div class="pro-price">1799￥</div>
-                  </a>
-                </li>
-                <li class="product">
-                  <a href="" target="_blank">
-                    <div class="pro-img">
-                      <img src="/imgs/nav-img/nav-1.png" alt="" />
-                    </div>
-                    <div class="pro-name">小米CC9</div>
-                    <div class="pro-price">1799￥</div>
-                  </a>
-                </li>
-                <li class="product">
-                  <a href="" target="_blank">
-                    <div class="pro-img">
-                      <img src="/imgs/nav-img/nav-1.png" alt="" />
-                    </div>
-                    <div class="pro-name">小米CC9</div>
-                    <div class="pro-price">1799￥</div>
-                  </a>
-                </li> -->
               </ul>
             </div>
           </div>
           <div class="item-menu">
             <span>ReadMi红米</span>
-            <!-- <div class="children"></div> -->
           </div>
           <div class="item-menu">
             <span>电视</span>
@@ -190,38 +143,23 @@ export default {
       this.$router.push("/login");
     },
     getProductList() {
-      this.axios
-        .get("/products", {
+      this.axios.get("/products", {
           params: {
             categoryId: "100012",
+            pageSize: 6,
           },
-        })
-        .then((res) => {
-          if (res.list.length > 6) {
-            this.phoneList = res.list.slice(0, 6);
-          }
+        }).then((res) => {
+          this.phoneList = res.list;
         });
     },
-    // getProductList() {
-    //   this.axios.get("/products", {
-    //       params: {
-    //         categoryId: "100012",
-    //         pageSize: 6,
-    //       },
-    //     }).then((res) => {
-    //       this.phoneList = res.list;
-    //     });
-    // },
     gotoCart() {
-      // 跳转
-      this.$router.push("/cart"); // 要注意取参
+      this.$router.push("/cart");
     },
   },
 };
 </script>
 
 <style lang="scss">
-// $img: "../../public/imgs/";
 @import "../assets/scss/base.scss";
 @import "../assets/scss/mixin.scss";
 @import "../assets/scss/config.scss";
@@ -234,12 +172,6 @@ export default {
     color: #b0b0b0;
 
     .container {
-      // width: 1226px;
-      // margin-left: auto;
-      // margin-right: auto;
-      // display: flex;
-      // justify-content: space-between;
-      // align-items: center;
       @include flex();
 
       a {
@@ -256,17 +188,6 @@ export default {
         margin-right: 0;
 
         .icon-cart {
-          // display: inline-block;
-          // width: 16px;
-          // height: 12px;
-          // // background: url('icon-cart-checked.png') no-repeat center;  // 需要放在相同目录下
-          // // background: url('/imgs/icon-cart-checked.png') no-repeat center;  // 暂时不支持，未解决
-          // // background: url('#{$img}/icon-cart-checked.png') no-repeat center;
-          // background: url("../../public/imgs/icon-cart-checked.png") no-repeat center;
-          // // background: url('~@/imgs/icon-cart-checked.png') no-repeat center;
-          // background-size: contain; // 填充填满
-          // @include bgImg(16px, 12px, '../../public/imgs/icon-cart-checked.png');
-          // @include bgImg(16px, 12px, "~/public/imgs/icon-cart-checked.png");
           @include bgImg(16px, 12px, "/imgs/icon-cart-checked.png");
           margin-right: 4px;
         }
@@ -277,13 +198,7 @@ export default {
   .nav-header {
     .container {
       position: relative;
-      // width: 1226px;
-      // margin-left: auto;
-      // margin-right: auto;
       height: 112px;
-      // display: flex;
-      // justify-content: space-between;
-      // align-items: center;
       @include flex();
 
       .header-logo {
@@ -298,27 +213,13 @@ export default {
           height: 55px;
 
           &:before {
-            content: " "; // 占位的
-            // display: inline-block;
-            // width: 55px;
-            // height: 55px;
-            // background: url("../../public/imgs/mi-logo.png") no-repeat center;
-            // background-size: 55px;
-            // @include bgImg(55px, 55px, '../../public/imgs/mi-logo.png', 55px);
-            // @include bgImg(55px, 55px, "~/public/imgs/mi-logo.png", 55px);
+            content: " ";
             @include bgImg(55px, 55px, "/imgs/mi-logo.png", 55px);
             transition: margin 0.2s;
           }
 
           &:after {
             content: " ";
-            // display: inline-block;
-            // width: 55px;
-            // height: 55px;
-            // background: url("../../public/imgs/mi-home.png") no-repeat center;
-            // background-size: 55px;
-            // @include bgImg(55px, 55px, '../../public/imgs/mi-home.png', 55px);
-            // @include bgImg(55px, 55px, "~/public/imgs/mi-home.png", 55px);
             @include bgImg(55px, 55px, "/imgs/mi-home.png", 55px);
           }
 
@@ -360,7 +261,6 @@ export default {
             top: 112px;
             left: 0;
             width: 1226px;
-            // height: 220px;
             height: 0;
             opacity: 0;
             overflow: hidden;
@@ -379,9 +279,6 @@ export default {
               line-height: 12px;
               text-align: center;
 
-              // z-index: 10px;
-              // background-color: #ffffff;
-              // transition: all ;
               a {
                 display: inline-block;
               }
@@ -410,7 +307,7 @@ export default {
               // 这里伪类的作用是控制每个手机之间的线
               &:before {
                 content: " ";
-                position: absolute; // product地方有相对定位
+                position: absolute;  // product地方有相对定位
                 top: 28px;
                 right: 0;
                 border-left: 1px solid $colorF;
@@ -445,13 +342,6 @@ export default {
           }
 
           a {
-            // display: inline-block;
-            // width: 18px;
-            // height: 18px;
-            // background: url("../../public/imgs/icon-search.png") no-repeat center;
-            // background-size: contain;  // 充满背景
-            // @include bgImg(18px, 18px, '../../public/imgs/icon-search.png');
-            // @include bgImg(18px, 18px, "~/public/imgs/icon-search.png");
             @include bgImg(18px, 18px, "/imgs/icon-search.png");
             margin-left: 17px;
           }
