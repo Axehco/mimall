@@ -13,8 +13,7 @@
           <a href="javascript:;" v-if="!username" @click="login">登录</a>
           <a href="javascript:;">我的订单</a>
           <a href="javascript:;" class="my-cart">
-            <span class="icon-cart" @click="gotoCart"></span>购物车</a
-          >
+            <span class="icon-cart" @click="gotoCart"></span>购物车 {{cartCount}}</a>
         </div>
       </div>
     </div>
@@ -28,11 +27,7 @@
             <span>小米手机</span>
             <div class="children">
               <ul>
-                <li
-                  class="product"
-                  v-for="(item, index) in phoneList"
-                  :key="index"
-                >
+                <li class="product" v-for="(item, index) in phoneList" :key="index">
                   <a v-bind:href="'/#/product/' + item.id" target="_blank">
                     <div class="pro-img">
                       <img :src="item.mainImage" :alt="item.subtitle" />
@@ -121,16 +116,26 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   name: "nav-header",
   data() {
     return {
-      username: "",
+      // username: this.$$store.state.username,
       phoneList: [],
     };
   },
   mounted() {
     this.getProductList();
+  },
+  computed: {
+    // username() {
+    //   return this.$store.state.username;
+    // },
+    // cartCount() {
+    //   return this.$store.state.cartCount;
+    // },
+    ...mapState(['username', 'cartCount'])
   },
   filters: {
     currency(val) {
@@ -144,13 +149,13 @@ export default {
     },
     getProductList() {
       this.axios.get("/products", {
-          params: {
-            categoryId: "100012",
-            pageSize: 6,
-          },
-        }).then((res) => {
-          this.phoneList = res.list;
-        });
+        params: {
+          categoryId: "100012",
+          pageSize: 6,
+        },
+      }).then((res) => {
+        this.phoneList = res.list;
+      });
     },
     gotoCart() {
       this.$router.push("/cart");
@@ -160,9 +165,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/scss/base.scss";
-@import "../assets/scss/mixin.scss";
-@import "../assets/scss/config.scss";
+@import '../assets/scss/base.scss';
+@import '../assets/scss/mixin.scss';
+@import '../assets/scss/config.scss';
 
 .header {
   .nav-topbar {
@@ -188,7 +193,7 @@ export default {
         margin-right: 0;
 
         .icon-cart {
-          @include bgImg(16px, 12px, "/imgs/icon-cart-checked.png");
+          @include bgImg(16px, 12px, '/imgs/icon-cart-checked.png');
           margin-right: 4px;
         }
       }
@@ -213,14 +218,14 @@ export default {
           height: 55px;
 
           &:before {
-            content: " ";
-            @include bgImg(55px, 55px, "/imgs/mi-logo.png", 55px);
+            content: ' ';
+            @include bgImg(55px, 55px, '/imgs/mi-logo.png', 55px);
             transition: margin 0.2s;
           }
 
           &:after {
-            content: " ";
-            @include bgImg(55px, 55px, "/imgs/mi-home.png", 55px);
+            content: ' ';
+            @include bgImg(55px, 55px, '/imgs/mi-home.png', 55px);
           }
 
           &:hover:before {
@@ -306,8 +311,8 @@ export default {
 
               // 这里伪类的作用是控制每个手机之间的线
               &:before {
-                content: " ";
-                position: absolute;  // product地方有相对定位
+                content: ' ';
+                position: absolute; // product地方有相对定位
                 top: 28px;
                 right: 0;
                 border-left: 1px solid $colorF;
@@ -342,7 +347,7 @@ export default {
           }
 
           a {
-            @include bgImg(18px, 18px, "/imgs/icon-search.png");
+            @include bgImg(18px, 18px, '/imgs/icon-search.png');
             margin-left: 17px;
           }
         }
