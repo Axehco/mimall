@@ -28,22 +28,22 @@ axios.defaults.timeout = 8000;
 // 接口错误拦截
 // response是axios插件封装给我们的，并不是接口返回给我们的值
 // response.data取到接口的值，也是axios封装的
-axios.interceptors.response.use(function(response) {
-  // 获取到接口返回的值
+axios.interceptors.response.use(function(response){
   let res = response.data;
-  let path = location.hash;
-  if (res.status === 0) {
+  if(res.status == 0){
     return res.data;
-  } else if (res.status === 10){
-    if (path !== '/#/login') {
-      // 这里用this取不到vue的实例，因此不能用vue里面的路由跳转
-      window.location.href = '/#/login';
-    }
-  } else {
-    alert(res.msg);
+  }else if(res.status == 10){
+    window.location.href = '/#/login';
+    return Promise.reject(res);
+  }else{
+    // Message.warning(res.msg);
     return Promise.reject(res);
   }
-})
+},(error)=>{
+  // let res = error.response;
+  // Message.error(res.data.message);
+  return Promise.reject(error);
+});
 
 Vue.use(VueAxios, axios);
 Vue.use(VueLazyLoad, {
