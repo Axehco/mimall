@@ -215,6 +215,7 @@
       addCart(id){
         this.axios.post('/carts',{
           productId:id,
+          // 默认加入购物车后商品是选中状态
           selected: true
         }).then((res)=>{
           this.showModal = true;

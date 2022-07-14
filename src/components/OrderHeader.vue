@@ -1,6 +1,5 @@
 <template>
   <div class="order-header">
-    下面是order-header的内容：
     <div class="container clearfix">
       <div class="header-logo">
         <a href="/#/index"></a>
@@ -12,17 +11,21 @@
         </h2>
       </div>
       <div class="username">
-        <a href="javascript:;">jack</a>
+        <a href="javascript:;">{{username}}</a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   name: 'order-header',
   props: {
     title: String
+  },
+  computed: {
+    ...mapState(['username'])
   }
 }
 </script>
