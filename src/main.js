@@ -37,7 +37,7 @@ axios.interceptors.response.use(function(response){
     window.location.href = '/#/login';
     return Promise.reject(res);
   }else{
-    // Message.warning(res.msg);
+    Message.warning(res.msg);
     return Promise.reject(res);
   }
 },(error)=>{
@@ -47,11 +47,10 @@ axios.interceptors.response.use(function(response){
 });
 
 Vue.use(VueAxios, axios);
-Vue.use(Message);  // 应用插件
+Vue.use(VueCookie);
 Vue.use(VueLazyLoad, {
   loading: '/imgs/loading-svg/loading-bars.svg'
 });
-Vue.use(VueCookie);
 Vue.prototype.$message = Message;  // 扩展
 Vue.config.productionTip = false
 
