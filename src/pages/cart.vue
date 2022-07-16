@@ -2,7 +2,7 @@
   <div class="cart">
     <order-header title="我的购物车">
       <template v-slot:tip>
-        <span>温习提示：产品是否购买成功，以最终下单为准哦，请尽快结算</span>
+        <span>温馨提示：产品是否购买成功，以最终下单为准哦，请尽快结算</span>
       </template>
     </order-header>
     <div class="wrapper">
@@ -60,6 +60,9 @@
   import OrderHeader from './../components/OrderHeader'
   import ServiceBar from './../components/ServiceBar'
   import NavFooter from './../components/NavFooter'
+  // 这里是通过导入的方式，没有挂载到实例上。
+  // Message.success('`删除成功`');
+  // import {Message} from 'element-ui'
   export default{
     name:'index',
     components:{
@@ -91,15 +94,19 @@
             selected = item.productSelected;
         if(type == '-'){
           if(quantity == 1){
-            // this.$message.warning('商品至少保留一件');
-            alert('商品至少保留一件');
+            // alert('商品至少保留一件');
+            // Message.info('商品至少保留一件');
+            // Message.warning('商品至少保留一件');
+            this.$message.warning('商品至少保留一件');
             return;
           }
           --quantity;
         }else if(type == '+'){
           if(quantity > item.productStock){
-            // this.$message.warning('购买数量不能超过库存数量');
-            alert('购买数量不能超过库存数量');
+            // alert('购买数量不能超过库存数量');
+            // Message.info('购买数量不能超过库存数量');
+            // Message.warning('购买数量不能超过库存数量');
+            this.$message.warning('购买数量不能超过库存数量');
             return;
           }
           ++quantity;
@@ -116,8 +123,9 @@
       // 删除购物车商品
       delProduct(item){
         this.axios.delete(`/carts/${item.productId}`).then((res)=>{
-          // this.$message.success('删除成功');
-          alert('删除成功');
+          // alert('删除成功');
+          // Message.success('`删除成功`');
+          this.$message.success('删除成功');
           this.renderData(res);
         });
       },
@@ -139,8 +147,9 @@
       order(){
         let isCheck = this.list.every(item=>!item.productSelected);
         if(isCheck){
-          // this.$message.warning('请选择一件商品');
-          alert('请选择一件商品');
+          // alert('请选择一件商品');
+          // Message.warning('请选择一件商品');
+          this.$message.warning('请选择一件商品');
         }else{
           this.$router.push('/order/confirm');
         }
