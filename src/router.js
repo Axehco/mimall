@@ -17,6 +17,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      // path用路径，name用名称
       path: '/',
       name: 'home',
       component: Home,
