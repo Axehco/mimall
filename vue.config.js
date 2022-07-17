@@ -30,7 +30,6 @@
 
 
 module.exports = {
-  lintOnSave: false,  // 关闭eslint校验
   devServer: {
     host: 'localhost',
     port: 8080,
@@ -54,6 +53,19 @@ module.exports = {
           '/api': ''
         }
       }
-    }
+    },
+  },
+  // 部署应用包时的基本 URL，请始终使用 publicPath 而不要直接修改 webpack 的 output.publicPath
+  // publicPath: '/app',
+  // 打包输出的路径
+  // outputDir: 'dist',
+  // 关闭eslint校验
+  // lintOnSave: false,
+  // 一般来说都是需要关闭的，不然会暴露源码
+  productionSourceMap: false,
+
+  // 路由的按需加载
+  chainWebpack:(config)=>{
+    config.plugins.delete('prefetch');
   }
 }
